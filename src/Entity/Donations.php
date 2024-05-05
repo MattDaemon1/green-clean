@@ -23,6 +23,13 @@ class Donations
     #[ORM\Column(type: Types::TEXT)]
     private ?string $message = null;
 
+    #[ORM\ManyToOne(inversedBy: 'donations')]
+    private ?User $user = null;
+
+    #[ORM\ManyToOne(inversedBy: 'donations')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Projects $projects = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -60,6 +67,30 @@ class Donations
     public function setMessage(string $message): static
     {
         $this->message = $message;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getProjects(): ?Projects
+    {
+        return $this->projects;
+    }
+
+    public function setProjects(?Projects $projects): static
+    {
+        $this->projects = $projects;
 
         return $this;
     }
