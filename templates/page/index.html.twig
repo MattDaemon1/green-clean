@@ -6,41 +6,13 @@
 {% block body %}
 
 	<div class="px-4 py-5 my-5 text-center">
-		<img class="d-block mx-auto mb-4" src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
-		<h1 class="display-5 fw-bold text-body-emphasis">Centered hero</h1>
+		<img class="d-block mx-auto mb-4" src="{{ asset('build/images/logo.png') }}" alt="" width="200" height="200">
+		<h1 class="display-5 fw-bold text-body-emphasis">Green & Clean</h1>
 		<div class="col-lg-6 mx-auto">
-			<p class="lead mb-4">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
-			<div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-				<button type="button" class="btn btn-primary btn-lg px-4 gap-3">Primary button</button>
-				<button type="button" class="btn btn-outline-secondary btn-lg px-4">Secondary</button>
-			</div>
-		</div>
-	</div>
-	<style>
-		.example-wrapper {
-			margin: 1em auto;
-			max-width: 800px;
-			width: 95%;
-			font: 18px / 1.5 sans-serif;
-		}
-		.example-wrapper code {
-			background: #F5F5F5;
-			padding: 2px 6px;
-		}
-	</style>
+			<p class="lead mb-4">Aidez-nous à faire la différence.</p>
+		</br>Rejoingnez nous dans</br>
+	notre action</p>
+<div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
 
-	<div class="example-wrapper">
-		<h1>Hello
-			{{ websiteName }}! ✅</h1>
-
-		This friendly message is coming from:
-		<ul>
-			<li>Your controller at
-				<code>C:/Users/mattm/Projects/green-clean/src/Controller/PageController.php</code>
-			</li>
-			<li>Your template at
-				<code>C:/Users/mattm/Projects/green-clean/templates/page/index.html.twig</code>
-			</li>
-		</ul>
-	</div>
-{% endblock %}
+	<button type="button" class="btn btn-outline-secondary btn-lg px-4">Faire un don</button>
+</div></div></div>{% endblock %}
