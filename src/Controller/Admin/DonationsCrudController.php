@@ -25,9 +25,7 @@ class DonationsCrudController extends AbstractCrudController
         yield TextEditorField::new('message', 'Message');
         yield DateTimeField::new('date', 'Date du don');
         yield AssociationField::new('projects', 'Projet');
-        yield AssociationField::new('user', 'Donateur');
-
-        
+        yield AssociationField::new('user', 'Donateur');  
     }
     
 }

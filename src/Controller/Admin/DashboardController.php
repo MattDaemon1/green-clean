@@ -3,6 +3,8 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Donations;
+use App\Entity\Projects;
+use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -43,6 +45,7 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Dons', 'fa-solid fa-hand-holding-dollar', Donations::class);
-        //yield MenuItem::linkToCrud('Dons', 'fa-solid fa-hand-holding-dollar', Donations::class);
+        yield MenuItem::linkToCrud('Projets', 'fa-solid fa-list', Projects::class);
+        yield MenuItem::linkToCrud('Donateurs', 'fa-solid fa-user-group', User::class);
     }
 }
