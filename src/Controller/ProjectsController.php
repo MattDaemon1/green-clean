@@ -14,7 +14,7 @@ class ProjectsController extends AbstractController
     {
         $projets = $projectsRepository->findBy([], ['id' => 'DESC']);
 
-        dump($projets);
+        
 
         return $this->render('projects/index.html.twig', [
             'projets' => $projets,

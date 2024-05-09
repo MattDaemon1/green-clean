@@ -13,6 +13,16 @@
 		</br>Rejoingnez nous dans</br>
 	notre action</p>
 <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-	
-	<button type="button" class="btn btn-outline-secondary btn-lg px-4">Faire un donS</button>
-</div></div></div>{% endblock %}
+
+	<button type="button" class="btn btn-outline-secondary btn-lg px-4">Faire un don</button>
+</div>
+<div>
+	<h2>Nos derniers projets</h2>
+</div>
+<div class="row text-center">
+	{% for projets in projets %}
+		{% include "partials/projets/_projets_block.html.twig" %}
+
+	{% endfor %}
+
+</div></div>{% endblock %}
