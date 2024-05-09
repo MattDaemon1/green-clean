@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Titre du projet
+{% endblock %}
+
+{% block body %}
+
+	<div class="row flex-lg-row-reverse g-5 py-5">
+		<div class="col-10 col-sm-8 col-lg-4">
+			<img src="{{ vich_uploader_asset(projets, 'imageFile')}}" class="card-img-top" alt="affiche {{ projets.title }}" loading="lazy">
+		</div>
+		<div class="col-lg-8">
+			<h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">{{ projets.title }}</h1>
+			<p class="lead">{{ projets.description |raw }}</p>
+		</div>
+	</div>
+
+{% endblock %}
