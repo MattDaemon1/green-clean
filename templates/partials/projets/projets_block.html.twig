@@ -1,3 +1,10 @@
-<h2>{{ projets.title }}</h2>
+<div class="col-md-4 my-2d-flex">
+	<div class="card w-100">
+		<img src="{{ vich_uploader_asset(projets, 'imageFile')}}" class="card-img-top" alt="affiche {{ projets.title }}">
+		<div class="card-body">
+			<h5 class="card-title">{{ projets.title }}</h5>
 
-<div>
+			<a href="#" class="btn btn-primary">Voir le projet</a>
+		</div>
+	</div>
+</div>
