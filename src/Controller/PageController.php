@@ -24,11 +24,11 @@ class PageController extends AbstractController
         ]);
     }
 
-    #[Route('/projets', name: 'app_projets')]
+    #[Route('/about', name: 'app_about')]
     public function projets(): Response
     {
         $websiteName = 'Green & Clean';
-        return $this->render('page/index.html.twig', [
+        return $this->render('page/about.html.twig', [
             'websiteName' => $websiteName,
         ]);
     }

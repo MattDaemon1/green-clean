@@ -14,9 +14,10 @@
 	notre action</p>
 <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
 
-	<button type="button" class="btn btn-outline-secondary btn-lg px-4">Faire un don</button>
+
+	<a href="{{ path('app_projets') }}" class="btn btn-outline-secondary btn-lg px-4">Faire un don</a>
 </div>
-<div>
+<div class="container">
 	<h2>Nos derniers projets</h2>
 </div>
 <div class="row text-center">
@@ -24,5 +25,7 @@
 		{% include "partials/projets/_projets_block.html.twig" %}
 
 	{% endfor %}
-
+	<div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+		<a href="{{ path('app_projets') }}" class="btn btn-outline-secondary btn-lg px-2">Voir tous les projets</a>
+	</div>
 </div></div>{% endblock %}

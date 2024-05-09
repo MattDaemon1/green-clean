@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class ProjectsController extends AbstractController
 {
-    #[Route('/projects', name: 'app_projects')]
+    #[Route('/projets', name: 'app_projets')]
     public function index(ProjectsRepository $projectsRepository): Response
     {
         $projets = $projectsRepository->findBy([], ['id' => 'DESC']);
