@@ -45,6 +45,18 @@ security:
 when@test:
     security:
         password_hashers:
+            # a hasher used in the past for some users
+        legacy:
+            algorithm: sha256
+            encode_as_base64: false
+            iterations: 1
+
+        App\Entity\User:
+            # the new hasher, along with its options
+            algorithm: sodium
+            migrate_from:
+                - bcrypt # uses the "bcrypt" hasher with the default options
+                - legacy # uses the "legacy" hasher configured above
             # By default, password hashers are resource intensive and take time. This is
             # important to generate secure password hashes. In tests however, secure hashes
             # are not important, waste resources and increase test times. The following
