@@ -8,6 +8,7 @@ use App\Form\DonationsType;
 use App\Repository\ProjectsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -27,9 +28,14 @@ class ProjectsController extends AbstractController
     }
 
     #[Route('/projects/{id}', name: 'app_projects_show')]
-    public function show(Projects $projects, Request $request, EntityManagerInterface $entityManager): Response
+    public function show(Projects $projects, Request $request, EntityManagerInterface $entityManager, Security $security): Response
     {
+        $user = $security->getUser();
         $donations = new Donations();
+        $donations->setProjects($projects);
+        $donations->setUser($user);
+        
+
         $form = $this->createForm(DonationsType::class, $donations);
         $form->handleRequest($request);
 
