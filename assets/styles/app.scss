@@ -4,3 +4,34 @@ $secondary: #7E5506;
 
 // the ~ allows you to reference things in node_modules
 @import "~bootstrap/scss/bootstrap";
+
+.row {
+    margin: 20px;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+}
+
+.row p {
+    font-size: 16px;
+    color: #333;
+}
+
+.row a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .row {
+        padding: 10px;
+    }
+
+    .row p {
+        font-size: 14px;
+    }
+
+}
+
+.card-img-top {
+    border-radius: 15px;
+}

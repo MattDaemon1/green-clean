@@ -5,12 +5,14 @@ namespace App\Controller;
 use App\Entity\Donations;
 use App\Entity\Projects;
 use App\Form\DonationsType;
+use App\Repository\DonationsRepository;
 use App\Repository\ProjectsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Attribute\Route;
 
 class ProjectsController extends AbstractController
@@ -28,12 +30,22 @@ class ProjectsController extends AbstractController
     }
 
     #[Route('/projects/{id}', name: 'app_projects_show')]
-    public function show(Projects $projects, Request $request, EntityManagerInterface $entityManager, Security $security): Response
+    public function show(Projects $projects, Request $request, EntityManagerInterface $entityManager, 
+                        Security $security, DonationsRepository $donationsRepository,
+                        SessionInterface $session): Response
     {
+        $session->set('previous_url', $request->getUri());
         $user = $security->getUser();
-        $donations = new Donations();
-        $donations->setProjects($projects);
-        $donations->setUser($user);
+
+        $donations = $donationsRepository->findOneBy(['projects' => $projects, 'user' => $user]);
+        if ($donations){
+            $donations = new Donations();
+            $donations->setProjects($projects);
+            $donations->setUser($user);
+        }
+
+
+        
         
 
         $form = $this->createForm(DonationsType::class, $donations);
@@ -49,6 +61,7 @@ class ProjectsController extends AbstractController
         return $this->render('projects/show.html.twig', [
             'projets' => $projects,
             'form' => $form,
+            'user' => $user,
         ]);
     }
 }

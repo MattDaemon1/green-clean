@@ -12,8 +12,14 @@ class DonationsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('sum')
-            ->add('message')
+        ->add('sum', null, [
+            'label' => 'Montant du don',
+            'attr' => ['placeholder' => 'Montant en €']
+        ])
+        ->add('message', null, [
+            'label' => 'Message',
+            'attr' => ['placeholder' => 'Votre message']
+        ]);
          
         ;
     }
