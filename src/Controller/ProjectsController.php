@@ -37,27 +37,30 @@ class ProjectsController extends AbstractController
         $session->set('previous_url', $request->getUri());
         $user = $security->getUser();
 
-        $donations = $donationsRepository->findOneBy(['projects' => $projects, 'user' => $user]);
-        if ($donations){
+        $donations = $donationsRepository->findOneBy([
+            'projects' => $projects,
+            'user' => $user,
+        ]);
+        
+        if (!$donations) {
             $donations = new Donations();
             $donations->setProjects($projects);
             $donations->setUser($user);
+            $donations->setDate(new \DateTime());
         }
-
-
         
-        
-
         $form = $this->createForm(DonationsType::class, $donations);
         $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()){
+        
+        if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($donations);
             $entityManager->flush();
-            
-
+        
+            $this->addFlash('success', 'Votre don a bien été enregistré.');
+        
+            return $this->redirectToRoute('app_projets');
         }
-
+        
         return $this->render('projects/show.html.twig', [
             'projets' => $projects,
             'form' => $form,
