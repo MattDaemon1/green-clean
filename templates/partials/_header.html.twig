@@ -16,10 +16,14 @@
 			<li>
 				<a href="{{ path('app_about') }}" class="nav-link px-2">A propos</a>
 			</li>
+			{% if is_granted('ROLE_ADMIN') %}
+				<li>
+					<a href="{{ path('admin') }}" class="nav-link px-2">Admin</a>
+				</li>
+			{% endif %}
 			<li>
-				<a href="{{ path('admin') }}" class="nav-link px-2">Admin</a>
+				<a href="{{ path('app_login') }}" class="nav-link px-2">Se connecter</a>
 			</li>
-
 		</ul>
 
 
