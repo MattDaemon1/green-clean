@@ -2,7 +2,7 @@
 	<div class="card w-100">
 		<img src="{{ vich_uploader_asset(projets, 'imageFile')}}" class="card-img-top" alt="affiche {{ projets.title }}">
 		<div class="card-body">
-			<h5 class="card-title">{{ projets.title }}</h5>
+			<h3 class="card-title">{{ projets.title }}</h3>
 
 			<a href="{{ path('app_projects_show', {'id':projets.id})}}" class="btn btn-primary">Voir le projet</a>
 		</div>

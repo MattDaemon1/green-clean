@@ -4,28 +4,27 @@
 {% endblock %}
 
 {% block body %}
+    <div class="container-fluid px-0">
+        <div class="text-center py-5">
+            <img class="d-block mx-auto mb-4" src="{{ asset('build/images/logo.png') }}" alt="" width="300" height="300">
+            <h1 class="display-5 fw-bold text-body-emphasis">Green & Clean</h1>
+            <p class="lead mb-4">Aidez-nous à faire la différence.</p>
+            <p>Rejoignez-nous dans notre action</p>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                <a href="{{ path('app_projets') }}" class="btn btn-secondary btn-lg px-4">Faire un don</a>
+            </div>
+        </div>
 
-	<div class="px-4 py-5 my-5 text-center">
-		<img class="d-block mx-auto mb-4" src="{{ asset('build/images/logo.png') }}" alt="" width="200" height="200">
-		<h1 class="display-5 fw-bold text-body-emphasis">Green & Clean</h1>
-		<div class="col-lg-6 mx-auto">
-			<p class="lead mb-4">Aidez-nous à faire la différence.</p>
-		</br>Rejoingnez nous dans</br>
-	notre action</p>
-<div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-
-
-	<a href="{{ path('app_projets') }}" class="btn btn-outline-secondary btn-lg px-4">Faire un don</a>
-</div>
-<div class="container">
-	<h2>Nos derniers projets</h2>
-</div>
-<div class="row text-center">
-	{% for projets in projets %}
-		{% include "partials/projets/_projets_block.html.twig" %}
-
-	{% endfor %}
-	<div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-		<a href="{{ path('app_projets') }}" class="btn btn-outline-secondary btn-lg px-2">Voir tous les projets</a>
-	</div>
-</div></div>{% endblock %}
+        <div class="container">
+            <h2>Nos derniers projets</h2>
+            <div class="row text-center">
+                {% for projets in projets %}
+                    {% include "partials/projets/_projets_block.html.twig" %}
+                {% endfor %}
+            </div>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                <a href="{{ path('app_projets') }}" class="btn btn-secondary btn-lg px-2">Voir tous les projets</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
