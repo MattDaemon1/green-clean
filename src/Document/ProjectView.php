@@ -1,40 +1,40 @@
+<?php
+
 namespace App\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
 /**
- * @MongoDB\Document
+ * @MongoDB\Document(collection="project_views")
  */
 class ProjectView
 {
-    /**
-     * @MongoDB\Id
-     */
+    /** @MongoDB\Id */
     private $id;
 
-    /**
-     * @MongoDB\Field(type="int")
-     */
+    /** @MongoDB\Field(type="string") */ // Changez en "string" si nécessaire
     private $projectId;
 
-    /**
-     * @MongoDB\Field(type="int")
-     */
-    private $viewCount = 0;
+    /** @MongoDB\Field(type="int") */
+    private $viewCount;
 
-    // Getters and setters
+    public function __construct(string $projectId)
+    {
+        $this->projectId = $projectId;
+        $this->viewCount = 0; // Initialisation dans le constructeur
+    }
 
     public function getId(): ?string
     {
         return $this->id;
     }
 
-    public function getProjectId(): ?int
+    public function getProjectId(): string // Changez en "string" si nécessaire
     {
         return $this->projectId;
     }
 
-    public function setProjectId(int $projectId): self
+    public function setProjectId(string $projectId): self // Changez en "string" si nécessaire
     {
         $this->projectId = $projectId;
         return $this;
@@ -43,12 +43,6 @@ class ProjectView
     public function getViewCount(): int
     {
         return $this->viewCount;
-    }
-
-    public function setViewCount(int $viewCount): self
-    {
-        $this->viewCount = $viewCount;
-        return $this;
     }
 
     public function incrementViewCount(): self

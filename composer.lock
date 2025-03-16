@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d37a6e064ae8cb433b83135a2cc624b4",
+    "content-hash": "ccdeb9dd3a3a099a8ad565fcf4b8549a",
     "packages": [
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -2000,6 +2000,83 @@
                 "source": "https://github.com/mongodb/mongo-php-library/tree/1.19.1"
             },
             "time": "2024-06-13T14:30:04+00:00"
+        },
+        {
+            "name": "mongodb/symfony-bundle",
+            "version": "0.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mongodb-labs/symfony-mongodb.git",
+                "reference": "af537c2a5c002938b58f2af3632bdbcee51ac2ac"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mongodb-labs/symfony-mongodb/zipball/af537c2a5c002938b58f2af3632bdbcee51ac2ac",
+                "reference": "af537c2a5c002938b58f2af3632bdbcee51ac2ac",
+                "shasum": ""
+            },
+            "require": {
+                "mongodb/mongodb": "^1.17",
+                "php": ">=8.1",
+                "symfony/config": "^6.3 || ^7.0",
+                "symfony/console": "^6.3 || ^7.0",
+                "symfony/dependency-injection": "^6.3.5 || ^7.0",
+                "symfony/http-kernel": "^6.3.5 || ^7.0",
+                "symfony/runtime": "^6.3 || ^7.0"
+            },
+            "require-dev": {
+                "doctrine/coding-standard": "^12.0",
+                "rector/rector": "^0.18",
+                "symfony/browser-kit": "^6.3 || ^7.0",
+                "symfony/filesystem": "^6.3 || ^7.0",
+                "symfony/framework-bundle": "^6.3.5 || ^7.0",
+                "symfony/phpunit-bridge": "~6.3.10 || ^6.4.1 || ^7.0.1",
+                "symfony/stopwatch": "^6.3 || ^7.0",
+                "symfony/web-profiler-bundle": "^6.3 || ^7.0",
+                "symfony/yaml": "^6.3 || ^7.0",
+                "zenstruck/browser": "^1.6"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "MongoDB\\Bundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Andreas Braun",
+                    "email": "andreas.braun@mongodb.com"
+                },
+                {
+                    "name": "Jeremy Mikola",
+                    "email": "jmikola@gmail.com"
+                },
+                {
+                    "name": "Jérôme Tamarelle",
+                    "email": "jerome.tamarelle@mongodb.com"
+                },
+                {
+                    "name": "Oskar Stark",
+                    "email": "oskarstark@googlemail.com"
+                }
+            ],
+            "description": "Bundle to integrate mongodb/mongodb into Symfony",
+            "homepage": "https://jira.mongodb.org/browse/PHPORM",
+            "keywords": [
+                "database",
+                "driver",
+                "mongodb",
+                "persistence"
+            ],
+            "support": {
+                "issues": "https://github.com/mongodb-labs/symfony-mongodb/issues",
+                "source": "https://github.com/mongodb-labs/symfony-mongodb/tree/0.2.1"
+            },
+            "time": "2023-12-09T15:01:09+00:00"
         },
         {
             "name": "monolog/monolog",

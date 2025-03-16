@@ -1,30 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Titre du projet
-{% endblock %}
+{% block title %}{{ projets.title }}{% endblock %}
 
 {% block body %}
 
-	<div class="row flex-lg-row-reverse g-5 py-5">
-		<div class="col-10 col-sm-8 col-lg-4">
-			<img src="{{ vich_uploader_asset(projets, 'imageFile')}}" class="card-img-top" class="image-rounded" alt="affiche {{ projets.title }}" loading="lazy">
-		</div>
-		<div class="col-lg-8">
-			<h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">{{ projets.title }}</h1>
-			<p class="lead">{{ projets.description |raw }}</p>
-		</div>
-	</div>
+    <div class="row flex-lg-row-reverse g-5 py-5">
+        <div class="col-10 col-sm-8 col-lg-4">
+            <img src="{{ vich_uploader_asset(projets, 'imageFile') }}" class="card-img-top image-rounded" alt="affiche {{ projets.title }}" loading="lazy">
+        </div>
+        <div class="col-lg-8">
+            <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">{{ projets.title }}</h1>
+            <p class="lead">{{ projets.description | raw }}</p>
+            <p><strong>Nombre de vues : {{ viewCount }}</strong></p> {# Affichez le nombre de vues #}
+        </div>
+    </div>
 
-	<div class="row">
-		{% if user %}
-			{% include "partials/donations/_form.html.twig" %}
-		{% else %}
-			<p>Vous devez être connecté pour pouvoir faire un don. Rendez-vous sur la page
-				<a href="{{ path('app_login') }}">Connexion</a>
-			</p>
-		{% endif %}
-
-
-	</div>
+    <div class="row">
+        {% if user %}
+            {% include "partials/donations/_form.html.twig" %}
+        {% else %}
+            <p>Vous devez être connecté pour pouvoir faire un don. Rendez-vous sur la page
+                <a href="{{ path('app_login') }}">Connexion</a>
+            </p>
+        {% endif %}
+    </div>
 
 {% endblock %}
