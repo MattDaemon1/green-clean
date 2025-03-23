@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h2>Créer un compte</h2>
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+
+    {{ form_start(registrationForm) }}
+        <div class="mb-3">
+            {{ form_label(registrationForm.email) }}
+            {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(registrationForm.email) }}
+        </div>
+        <div class="mb-3">
+            {{ form_label(registrationForm.password) }}
+            {{ form_widget(registrationForm.password, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(registrationForm.password) }}
+        </div>
+        <button type="submit" class="btn btn-success">S'inscrire</button>
+    {{ form_end(registrationForm) }}
+</div>
+{% endblock %}

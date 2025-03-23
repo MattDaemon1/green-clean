@@ -26,10 +26,20 @@
 						<a href="{{ path('admin') }}" class="nav-link px-2">Admin</a>
 					</li>
 				{% endif %}
-				<li>
-					<a href="{{ path('app_login') }}" class="nav-link px-2">Se connecter</a>
-				</li>
-			</ul>
-		</div>
-	</header>
-</div>
+
+				{% if app.user %}
+					<li>
+						<a href="{{ path('app_logout') }}" class="nav-link px-2 text-danger">Déconnexion</a>
+					</li>
+				{% else %}
+					<li>
+						<a href="{{ path('app_register') }}" class="nav-link px-2">S'inscrire</a>
+					</li>
+					<li>
+						<a href="{{ path('app_login') }}" class="nav-link px-2">Se connecter</a>
+					</li>
+				{% endif %}
+			</li>
+		</ul>
+	</div>
+</header></div>
