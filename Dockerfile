@@ -5,19 +5,17 @@ FROM php:8.2-fpm
 RUN apt-get update && apt-get install -y \
     curl \
     git \
-    libicu-dev \
-    libzip-dev \
-    unzip \
     libcurl4-openssl-dev \
+    libicu-dev \
     libonig-dev \
     libssl-dev \
+    libzip-dev \
+    unzip \
     && docker-php-ext-install intl pdo_mysql zip opcache curl mbstring \
     && docker-php-ext-enable opcache curl mbstring \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
-
-RUN apt-get update && apt-get install -y libcurl4-openssl-dev libssl-dev \
     && pecl install mongodb \
-    && echo "extension=mongodb.so" > /usr/local/etc/php/conf.d/mongodb.ini
+    && echo "extension=mongodb.so" > /usr/local/etc/php/conf.d/mongodb.ini \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Installation de Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
