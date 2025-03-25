@@ -8,17 +8,18 @@ RUN apt-get update && apt-get install -y ca-certificates
 RUN apt-get update && apt-get install -y \
     curl \
     git \
-    libicu-dev \
-    libzip-dev \
-    unzip \
     libcurl4-openssl-dev \
+    libicu-dev \
     libonig-dev \
     libssl-dev \
+    libzip-dev \
+    unzip \
     && docker-php-ext-install intl pdo_mysql zip opcache curl mbstring \
     && docker-php-ext-enable opcache curl mbstring \
+    && pecl install mongodb \
+    && echo "extension=mongodb.so" > /usr/local/etc/php/conf.d/mongodb.ini \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Installation de l'extension MongoDB
 RUN apt-get update && apt-get install -y libcurl4-openssl-dev libssl-dev \
     && pecl install mongodb \
     && echo "extension=mongodb.so" > /usr/local/etc/php/conf.d/mongodb.ini
