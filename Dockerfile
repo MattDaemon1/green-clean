@@ -1,6 +1,9 @@
 # Image de base PHP avec FPM et CLI
 FROM php:8.2-fpm
 
+# Installation des certificats SSL avant les extensions pour éviter les erreurs de mise à jour
+RUN apt-get update && apt-get install -y ca-certificates
+
 # Installation des dépendances système et extensions PHP nécessaires
 RUN apt-get update && apt-get install -y \
     curl \
@@ -15,12 +18,16 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-enable opcache curl mbstring \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
+# Installation de l'extension MongoDB
 RUN apt-get update && apt-get install -y libcurl4-openssl-dev libssl-dev \
     && pecl install mongodb \
     && echo "extension=mongodb.so" > /usr/local/etc/php/conf.d/mongodb.ini
 
 # Installation de Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# Configuration de Composer pour forcer HTTPS
+RUN composer config --global secure-http true && composer self-update
 
 # Installation de Symfony CLI
 RUN curl -sS https://get.symfony.com/cli/installer | bash \
