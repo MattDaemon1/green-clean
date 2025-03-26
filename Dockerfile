@@ -21,8 +21,7 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN apt-get update && apt-get install -y libcurl4-openssl-dev libssl-dev \
-    && pecl install mongodb \
-    && echo "extension=mongodb.so" > /usr/local/etc/php/conf.d/mongodb.ini
+    && if ! php -m | grep -q mongodb; then pecl install mongodb && echo "extension=mongodb.so" > /usr/local/etc/php/conf.d/mongodb.ini; fi
 
 # Installation de Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
