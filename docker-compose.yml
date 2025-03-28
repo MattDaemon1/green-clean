@@ -48,7 +48,7 @@ services:
       - mysql_data:/var/lib/mysql
 
   php:
-    image: php:8.4-apache
+    image: php:8.4-fpm
     container_name: green-clean-php
     volumes:
       - ./public_html:/var/www/html

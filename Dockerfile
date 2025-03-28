@@ -17,6 +17,7 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install intl pdo_mysql zip opcache curl mbstring \
     && docker-php-ext-enable opcache curl mbstring \
     && pecl install mongodb \
+    && docker-php-ext-enable mongodb \
     && echo "extension=mongodb.so" > /usr/local/etc/php/conf.d/mongodb.ini \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
