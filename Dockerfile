@@ -1,58 +1,28 @@
-# Utilisation de l'image officielle PHP-FPM 8.4.5
-FROM php:8.4.5-fpm
+FROM php:8.3-apache
 
-# Installation des dépendances système
+# Installation des extensions nécessaires
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    curl \
-    git \
-    unzip \
-    libicu-dev \
-    libzip-dev \
-    libonig-dev \
-    libpq-dev \
-    libxml2-dev \
-    libxslt-dev \
-    libjpeg-dev \
-    libpng-dev \
-    libfreetype6-dev \
-    libcurl4-openssl-dev \
-    libssl-dev \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install \
-        intl \
-        zip \
-        pdo_mysql \
-        mbstring \
-        exif \
-        sockets \
-        opcache \
-        xsl \
-    && pecl install mongodb redis \
-    && docker-php-ext-enable mongodb redis \
+    curl git gnupg libcurl4-openssl-dev libfreetype6-dev libicu-dev libjpeg-dev libonig-dev \
+    libpng-dev libssl-dev libxml2-dev libzip-dev pkg-config unzip \
+    && docker-php-ext-install intl pdo_mysql zip gd mbstring opcache \
+    && pecl install mongodb \
+    && docker-php-ext-enable mongodb \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Installation de Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+# Activation du mod rewrite d'Apache
+RUN a2enmod rewrite
 
-# Installation de Symfony CLI
-RUN curl -sS https://get.symfony.com/cli/installer | bash \
-    && mv /root/.symfony5/bin/symfony /usr/local/bin/symfony
+# Copie du fichier php.ini custom
+#COPY ./docker/php.ini /usr/local/etc/php/conf.d/custom.ini
 
-# Création du répertoire de travail
-WORKDIR /var/www
+# Modification du DocumentRoot Apache (pour Symfony)
+RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/public|' /etc/apache2/sites-available/000-default.conf
 
-# Copie des fichiers du projet
+# Copie du code dans le conteneur
 COPY . /var/www
 
-# Ajustement des permissions
-RUN chown -R www-data:www-data /var/www/var \
-    && chown -R www-data:www-data /var/www/public/uploads
+# Définir le répertoire de travail
+WORKDIR /var/www
 
-# Copier le fichier php.ini personnalisé
-COPY php/php.ini /usr/local/etc/php/php.ini
-
-# Exposition du port PHP-FPM
-EXPOSE 9000
-
-# Commande de démarrage
-CMD ["php-fpm"]
+# Donne les bons droits
+RUN chown -R www-data:www-data /var/www
