@@ -1,3 +1,5 @@
+
+
 services:
   app:
     build:
@@ -8,93 +10,53 @@ services:
     working_dir: /var/www
     volumes:
       - .:/var/www
-      - /etc/ssl/certs:/etc/ssl/certs:ro # Monte les certificats SSL
     environment:
-      - APP_ENV=dev
-      - DATABASE_URL=mysql://root:root@db:3306/green
-      - REDIS_URL=redis://redis:6379
-      - MONGODB_URL=mongodb://mongo:27017/green_clean
+      APP_ENV: dev
+      DATABASE_URL: mysql://symfony:symfony@db:3306/green
+      MONGODB_URL: mongodb://admin:admin@mongo:27017
+      REDIS_URL: redis://redis:6379
     depends_on:
       - db
-      - redis
       - mongo
+      - redis
 
   nginx:
-    image: nginx:latest
+    image: nginx:alpine
     container_name: symfony_nginx
     restart: always
     ports:
       - "8000:80"
-      - "443:443" # Ajout du port HTTPS
+      - "443:443"
     volumes:
       - .:/var/www
-      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
-      - ./nginx/certs:/etc/nginx/ssl # Dossier pour les certificats SSL
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
     depends_on:
       - app
 
   db:
-    image: mysql:8.2
+    image: mysql:8.0
     container_name: symfony_db
     restart: always
+    ports:
+      - "3307:3306"
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: green
       MYSQL_USER: symfony
       MYSQL_PASSWORD: symfony
-    ports:
-      - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
-
-  php:
-    image: php:8.1-apache
-    container_name: green-clean-php
-    volumes:
-      - ./public_html:/var/www/html
-      - ./php.ini:/usr/local/etc/php/php.ini # Mount custom php.ini
-    ports:
-      - "8080:80"
-    depends_on:
-      - db
-
-  redis:
-    image: redis:latest
-    container_name: symfony_redis
-    restart: always
-    ports:
-      - "6379:6379"
-
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    container_name: symfony_phpmyadmin
-    restart: always
-    ports:
-      - "8081:80"
-    environment:
-      PMA_HOST: db
-      MYSQL_ROOT_PASSWORD: root
-    depends_on:
-      - db
-
-  mailer:
-    image: axllent/mailpit
-    container_name: symfony_mailer
-    ports:
-      - "1025:1025"
-      - "8025:8025"
-    environment:
-      MP_SMTP_AUTH_ACCEPT_ANY: 1
-      MP_SMTP_AUTH_ALLOW_INSECURE: 1
 
   mongo:
     image: mongo:6
     container_name: symfony_mongo
     restart: always
-    environment:
-      MONGO_INITDB_DATABASE: green_clean
     ports:
       - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+      MONGO_INITDB_DATABASE: green_clean
     volumes:
       - mongo_data:/data/db
 
@@ -107,24 +69,31 @@ services:
     environment:
       ME_CONFIG_MONGODB_SERVER: mongo
       ME_CONFIG_MONGODB_PORT: 27017
-      ME_CONFIG_BASICAUTH_USERNAME: admin
-      ME_CONFIG_BASICAUTH_PASSWORD: admin
+      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
+      ME_CONFIG_MONGODB_ADMINPASSWORD: admin
     depends_on:
       - mongo
 
-  node:
-    image: node:18
-    container_name: symfony_node
-    working_dir: /var/www
-    volumes:
-      - .:/var/www
-    command: sh -c "npm install && npm run dev"
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: symfony_phpmyadmin
+    restart: always
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      MYSQL_ROOT_PASSWORD: root
+    depends_on:
+      - db
+
+  redis:
+    image: redis:latest
+    container_name: symfony_redis
+    restart: always
+    ports:
+      - "6379:6379"
 
 volumes:
   mysql_data:
   mongo_data:
-  db_data:
-
-networks:
-  default:
-    driver: bridge

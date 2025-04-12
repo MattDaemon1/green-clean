@@ -1,5 +1,5 @@
 # Image de base PHP avec FPM et CLI
-FROM php:8.2-fpm
+FROM php:8.3-fpm
 
 # Installation des certificats SSL avant les extensions pour éviter les erreurs de mise à jour
 RUN apt-get update && apt-get install -y ca-certificates
