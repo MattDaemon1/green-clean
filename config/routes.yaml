@@ -6,3 +6,19 @@ controllers:
 reset_password:
     path: /reset-password
     controller: Symfony\Bundle\SecurityBundle\Controller\ForgottenPasswordController::requestTokenAction
+
+admin_dashboard:
+    path: /admin
+    controller: App\Controller\Admin\DashboardController::index
+
+admin_donations:
+    path: /admin/donations
+    controller: App\Controller\Admin\DonationsController::index
+
+admin_users:
+    path: /admin/users
+    controller: App\Controller\Admin\UsersController::index
+
+admin_projects:
+    path: /admin/projects
+    controller: App\Controller\Admin\ProjectsController::index

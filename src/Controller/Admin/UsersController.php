@@ -6,11 +6,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class DashboardController extends AbstractController
+class UsersController extends AbstractController
 {
-    #[Route('/admin', name: 'admin_dashboard')]
+    #[Route('/admin/users', name: 'admin_users')]
     public function index(): Response
     {
-        return $this->render('admin/dashboard.html.twig');
+        return $this->render('admin/users.html.twig');
     }
 }
