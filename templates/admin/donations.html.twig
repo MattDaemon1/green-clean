@@ -6,7 +6,7 @@
 {% block body %}
 	<h1>Gestion des Dons</h1>
 
-	<table>
+	<table class="table table-striped">
 		<thead>
 			<tr>
 				<th>ID</th>
@@ -15,6 +15,7 @@
 				<th>Message</th>
 				<th>Utilisateur</th>
 				<th>Projet</th>
+				<th>Actions</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -26,8 +27,14 @@
 					<td>{{ donation.message }}</td>
 					<td>{{ donation.user ? donation.user.nickname : 'Anonyme' }}</td>
 					<td>{{ donation.projects.title }}</td>
+					<td>
+						<a href="{{ path('admin_donations_edit', {id: donation.id}) }}" class="btn btn-primary btn-sm">Modifier</a>
+						<a href="{{ path('admin_donations_delete', {id: donation.id}) }}" class="btn btn-danger btn-sm">Supprimer</a>
+					</td>
 				</tr>
 			{% endfor %}
 		</tbody>
 	</table>
+
+	<a href="{{ path('admin_donations_create') }}" class="btn btn-success">Créer un nouveau don</a>
 {% endblock %}
