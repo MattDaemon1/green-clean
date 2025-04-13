@@ -22,3 +22,17 @@ admin_users:
 admin_projects:
     path: /admin/projects
     controller: App\Controller\Admin\ProjectsController::index
+
+admin_projects_edit:
+    path: /admin/projects/{id}/edit
+    controller: App\Controller\Admin\ProjectController::edit
+    methods: [GET, POST]
+
+admin_projects_create:
+    path: /admin/projects/create
+    controller: App\Controller\Admin\ProjectController::create
+    methods: [GET, POST]
+admin_projects_delete:
+    path: /admin/projects/{id}/delete
+    controller: App\Controller\Admin\ProjectController::delete
+    methods: [GET, POST]
