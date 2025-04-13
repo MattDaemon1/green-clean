@@ -40,4 +40,28 @@ class ProjectsRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    public function filterProjects(?string $keyword, ?\DateTimeImmutable $updatedAfter, ?int $minDonations): array
+    {
+        $qb = $this->createQueryBuilder('p');
+
+        if ($keyword) {
+            $qb->andWhere('p.title LIKE :keyword OR p.description LIKE :keyword')
+               ->setParameter('keyword', '%' . $keyword . '%');
+        }
+
+        if ($updatedAfter) {
+            $qb->andWhere('p.updatedAt >= :updatedAfter')
+               ->setParameter('updatedAfter', $updatedAfter);
+        }
+
+        if ($minDonations !== null) {
+            $qb->leftJoin('p.donations', 'd')
+               ->groupBy('p.id')
+               ->having('COUNT(d.id) >= :minDonations')
+               ->setParameter('minDonations', $minDonations);
+        }
+
+        return $qb->getQuery()->getResult();
+    }
 }

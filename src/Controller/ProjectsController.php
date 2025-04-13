@@ -75,4 +75,18 @@ class ProjectsController extends AbstractController
             
         ]);
     }
+
+    #[Route('/projets/filtrer', name: 'app_projets_filter', methods: ['GET'])]
+    public function filter(Request $request, ProjectsRepository $projectsRepository): Response
+    {
+        $keyword = $request->query->get('keyword');
+        $updatedAfter = $request->query->get('updatedAfter') ? new \DateTimeImmutable($request->query->get('updatedAfter')) : null;
+        $minDonations = $request->query->get('minDonations') ? (int) $request->query->get('minDonations') : null;
+
+        $filteredProjects = $projectsRepository->filterProjects($keyword, $updatedAfter, $minDonations);
+
+        return $this->render('projects/filter_results.html.twig', [
+            'projets' => $filteredProjects,
+        ]);
+    }
 }

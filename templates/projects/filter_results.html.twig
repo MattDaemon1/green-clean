@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Résultats du filtre
+{% endblock %}
+
+{% block body %}
+	<h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Résultats du filtre</h1>
+
+	<div class="row text-center">
+		{% if projets is not empty %}
+			{% for projets in projets %}
+				{% include "partials/projets/_projets_block.html.twig" %}
+			{% endfor %}
+		{% else %}
+			<p>Aucun projet ne correspond aux critères de recherche.</p>
+		{% endif %}
+	</div>
+
+	<a href="{{ path('app_projets') }}" class="btn btn-primary mt-3">Retour à la liste des projets</a>
+{% endblock %}
