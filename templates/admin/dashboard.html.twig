@@ -5,11 +5,24 @@
 
 {% block body %}
 	<h1>Bienvenue sur le Dashboard Administrateur</h1>
-	
-	
-		<a href="{{ path('admin_donations') }}">Gestion des Dons</a>
-		<a href="{{ path('admin_users') }}">Gestion des Utilisateurs</a>
-		<a href="{{ path('admin_projects') }}">Gestion des Projets</a>
-	
-	
+
+	<div class="dashboard-cards">
+		<div class="card" style="border-radius: 15px; background-color: #f0f8ff; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); padding: 20px;">
+			<h2 style="color: #2c3e50;">Gestion des Dons</h2>
+			<p style="color: #34495e;">Consultez et gérez les donations effectuées.</p>
+			<a href="{{ path('admin_donations') }}" class="btn" style="background-color: #3498db; color: white; border-radius: 5px; padding: 10px 15px; text-decoration: none;">Voir les Dons</a>
+		</div>
+
+		<div class="card" style="border-radius: 15px; background-color: #f0f8ff; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); padding: 20px;">
+			<h2 style="color: #2c3e50;">Gestion des Utilisateurs</h2>
+			<p style="color: #34495e;">Gérez les utilisateurs de la plateforme.</p>
+			<a href="{{ path('admin_users') }}" class="btn" style="background-color: #3498db; color: white; border-radius: 5px; padding: 10px 15px; text-decoration: none;">Voir les Utilisateurs</a>
+		</div>
+
+		<div class="card" style="border-radius: 15px; background-color: #f0f8ff; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); padding: 20px;">
+			<h2 style="color: #2c3e50;">Gestion des Projets</h2>
+			<p style="color: #34495e;">Consultez et administrez les projets en cours.</p>
+			<a href="{{ path('admin_projects') }}" class="btn" style="background-color: #3498db; color: white; border-radius: 5px; padding: 10px 15px; text-decoration: none;">Voir les Projets</a>
+		</div>
+	</div>
 {% endblock %}

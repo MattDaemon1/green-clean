@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard User
+{% endblock %}
+
+{% block body %}
+	<h1>Bienvenue sur votre profil</h1>
+	<p>Voici votre tableau de bord utilisateur.</p>
+	<a href="{{ path('user_profile') }}">Mon Profil</a>
+	<a href="{{ path('user_projects') }}">Mes Projets</a>
+	<a href="{{ path('user_donations') }}">Mes Dons</a>
+	<a href="{{ path('user_settings') }}">Paramètres</a>
+	
+	
+		
+	
+	
+{% endblock %}

@@ -24,7 +24,13 @@
 				{% if is_granted('ROLE_ADMIN') %}
 					<li>
 						<a href="{{ path('admin_dashboard') }}" class="nav-link px-2">Admin</a>
-					</li>
+					</li> 
+				{% endif %}
+
+				{% if is_granted('ROLE_USER') %}
+					{# <li>
+											<a href="{{ path('user_dashboard') }}" class="nav-link px-2">Profil</a>
+										</li> #}
 				{% endif %}
 
 				{% if app.user %}
