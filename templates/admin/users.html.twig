@@ -5,5 +5,33 @@
 
 {% block body %}
 	<h1>Gestion des Utilisateurs</h1>
-	<p>Liste des utilisateurs à venir...</p>
+
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Nom d'utilisateur</th>
+				<th>Email</th>
+				<th>Rôle</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for user in users %}
+				<tr>
+					<td>{{ user.id }}</td>
+					<td>{{ user.nickname }}</td>
+					<td>{{ user.email }}</td>
+					<td>{{ user.roles|join(', ') }}</td>
+					<td>
+						<a href="{{ path('admin_users_edit', {id: user.id}) }}" class="btn btn-primary btn-sm">Modifier</a>
+						<a href="{{ path('admin_users_delete', {id: user.id}) }}" class="btn btn-danger btn-sm">Supprimer</a>
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<a href="{{ path('admin_users_create') }}" class="btn btn-success">Créer un nouvel utilisateur</a>
+	<a href="{{ path('admin_dashboard') }}" class="btn btn-secondary">Retour au Dashboard</a>
 {% endblock %}

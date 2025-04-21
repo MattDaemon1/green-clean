@@ -89,7 +89,11 @@ class UserCrudController extends AbstractCrudController
                 return;
             }
 
-            $hash = $this->userPasswordHasher->hashPassword($this->getUser(), $password);
+            $user = $this->getUser();
+            if (!$user instanceof \Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface) {
+                throw new \LogicException('The logged-in user must implement PasswordAuthenticatedUserInterface.');
+            }
+            $hash = $this->userPasswordHasher->hashPassword($user, $password);
             $form->getData()->setPassword($hash);
         };
     }
