@@ -3,7 +3,8 @@ $secondary: #7E5506;
 
 @use "~bootstrap/scss/bootstrap";
 
-html, body {
+html,
+body {
     height: 100%;
     margin: 0;
     font-size: 20px;
@@ -14,20 +15,20 @@ html, body {
 }
 
 header {
-    background-color: #f8f9fa; // Couleur de fond pour le header
-    color: #333; // Couleur pour le texte du header
+    background-color: #f8f9fa;
+    color: #333;
 }
 
 footer {
-    background-color: #f8f9fa; // Couleur de fond pour le footer
-    color: #333; // Couleur pour le texte du footer
+    background-color: #f8f9fa;
+    color: #333;
     padding: 20px 0;
     text-align: center;
     width: 100%;
 }
 
 footer .text-body-secondary {
-    color: #6c757d; // Couleur pour le texte du footer
+    color: #6c757d;
 }
 
 .row {
@@ -81,38 +82,39 @@ footer .text-body-secondary {
 }
 
 h1 {
-    text-align: center; // Centre le texte du h1
-    margin-bottom: 20px; // Ajoute un espace en dessous du h1
-    font-size: 40px; // Taille du h1
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 40px;
 }
+
 h2 {
-    text-align: center; // Centre le texte du h2
-    margin-bottom: 20px; // Ajoute un espace en dessous du h2
-    font-size: 35px; // Taille du h2
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 35px;
 }
 
 h3 {
-    text-align: center; // Centre le texte du h3
-    margin-bottom: 20px; // Ajoute un espace en dessous du h3
-    font-size: 20px; // Taille du h3
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 20px;
 }
 
 .btn {
-    display: block; // Permet de centrer le bouton
-    margin: 0 auto; // Centre le bouton horizontalement
-    width: 200px; // Largeur du bouton
-    margin-top: 20px; // Ajoute un espace en dessous du bouton
-    border-radius: 15px; // Arrondi les coins du bouton
-    font-size: 16px; // Taille de la police du bouton
-    font-weight: bold; // Gras pour le texte du bouton
-    text-transform: uppercase; // Met le texte en majuscule
-    padding: 10px; // Ajoute de l'espace autour du texte du bouton
-    text-align: center; // Centre le texte du bouton
-    color: #fff; // Couleur du texte du bouton
-    text-decoration: none; // Enlève le soulignement du texte du bouton
-    cursor: pointer; // Change le curseur au survol du bouton
-    transition: background-color 0.3s; // Ajoute une transition sur la couleur de fond du bouton
-    border: none; // Enlève la bordure du bouton
+    display: block;
+    margin: 0 auto;
+    width: 200px;
+    margin-top: 20px;
+    border-radius: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 10px;
+    text-align: center;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border: none;
 }
 
 .btn-primary {
