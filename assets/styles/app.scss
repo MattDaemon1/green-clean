@@ -154,3 +154,53 @@ h3 {
     background-color: darken($secondary, 20%);
     border-color: darken($secondary, 20%);
 }
+
+// Added styles to align the cards on the same line and ensure they have the same height.
+
+.dashboard-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.card {
+    flex: 1;
+    max-width: 30%;
+    min-height: 250px;
+    border-radius: 15px;
+    background-color: #f0f8ff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card h2 {
+    color: #2c3e50;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.card p {
+    color: #34495e;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.card .btn {
+    background-color: #3498db;
+    color: white;
+    border-radius: 5px;
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.card .btn:hover {
+    background-color: darken(#3498db, 10%);
+}
