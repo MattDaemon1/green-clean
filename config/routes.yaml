@@ -51,3 +51,23 @@ admin_projects_delete:
     path: /admin/projects/{id}/delete
     controller: App\Controller\Admin\ProjectController::delete
     methods: [GET, POST]
+
+user_dashboard:
+    path: /user/dashboard
+    controller: App\Controller\UserController::dashboard
+
+user_profile:
+    path: /user/profile
+    controller: App\Controller\UserController::profile
+
+user_projects:
+    path: /user/projects
+    controller: App\Controller\UserController::projects
+
+user_donations:
+    path: /user/donations
+    controller: App\Controller\UserController::donations
+
+user_settings:
+    path: /user/settings
+    controller: App\Controller\UserController::settings

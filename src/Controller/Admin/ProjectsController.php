@@ -21,6 +21,8 @@ class ProjectsController extends AbstractController
         ]);
     }
 
+    
+
     #[Route('/admin/projects/delete/{id}', name: 'admin_projects_delete', methods: ['POST'])]
     public function delete(int $id, EntityManagerInterface $entityManager): Response
     {

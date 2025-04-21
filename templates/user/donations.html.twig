@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User Donations
+{% endblock %}
+
+{% block body %}
+	<h1>Your Donations</h1>
+
+	<table>
+		<thead>
+			<tr>
+				<th>Project</th>
+				<th>Amount</th>
+				<th>Date</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for donation in Donations %}
+				<tr>
+					<td>{{ donation.project.title }}</td>
+					<td>{{ donation.sum }}</td>
+					<td>{{ donation.date|date('Y-m-d') }}</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="3">No donations found.</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+{% endblock %}
