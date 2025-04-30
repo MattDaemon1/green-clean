@@ -5,6 +5,34 @@
 
 {% block body %}
 	<h1>Your Projects</h1>
-	<p>Manage your projects here. You can create, edit, or delete projects.</p>
-	<!-- Add project management UI here -->
+
+	<h2>Projects You Donated To</h2>
+	<div class="donated-projects">
+		{% for project in donatedProjects %}
+			<div class="project-card">
+				<h3>{{ project.title }}</h3>
+				<p>{{ project.description }}</p>
+				<p>
+					<strong>Total Donations:</strong>
+					{{ project.totalDonations }}</p>
+			</div>
+		{% else %}
+			<p>You have not donated to any projects yet.</p>
+		{% endfor %}
+	</div>
+
+	<h2>Your Created Projects</h2>
+	<div class="created-projects">
+		{% for project in createdProjects %}
+			<div class="project-card">
+				<h3>{{ project.title }}</h3>
+				<p>{{ project.description }}</p>
+				<p>
+					<strong>Total Donations Received:</strong>
+					{{ project.totalDonations }}</p>
+			</div>
+		{% else %}
+			<p>You have not created any projects yet.</p>
+		{% endfor %}
+	</div>
 {% endblock %}

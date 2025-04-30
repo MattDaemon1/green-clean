@@ -89,4 +89,35 @@ class ProjectsController extends AbstractController
             'projets' => $filteredProjects,
         ]);
     }
+
+    #[Route('/user/projects', name: 'app_user_projects')]
+    public function userProjects(ProjectsRepository $projectsRepository, DonationsRepository $donationsRepository, Security $security): Response
+    {
+        $user = $security->getUser();
+
+        // Fetch projects the user has donated to
+        $donatedProjects = $donationsRepository->createQueryBuilder('d')
+            ->select('p.id, p.title, p.description, SUM(d.sum) as totalDonations')
+            ->join('d.projects', 'p')
+            ->where('d.user = :user')
+            ->setParameter('user', $user)
+            ->groupBy('p.id')
+            ->getQuery()
+            ->getResult();
+
+        // Fetch projects created by the user
+        $createdProjects = $projectsRepository->createQueryBuilder('p')
+            ->select('p.id, p.title, p.description, SUM(d.sum) as totalDonations')
+            ->leftJoin('p.donations', 'd')
+            ->where('p.owner = :user')
+            ->setParameter('user', $user)
+            ->groupBy('p.id')
+            ->getQuery()
+            ->getResult();
+
+        return $this->render('user/projects.html.twig', [
+            'donatedProjects' => $donatedProjects,
+            'createdProjects' => $createdProjects,
+        ]);
+    }
 }

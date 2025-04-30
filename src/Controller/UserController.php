@@ -7,14 +7,18 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\DonationsRepository;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Doctrine\ORM\EntityManagerInterface;
 
 class UserController extends AbstractController
 {
     private $donationsRepository;
+    private $entityManager;
 
-    public function __construct(DonationsRepository $donationsRepository)
+    public function __construct(DonationsRepository $donationsRepository, EntityManagerInterface $entityManager)
     {
         $this->donationsRepository = $donationsRepository;
+        $this->entityManager = $entityManager;
     }
 
     /**
@@ -64,4 +68,45 @@ class UserController extends AbstractController
         // Logic for user settings
         return $this->render('user/settings.html.twig');
     }
-}
+
+    /**
+     * @Route("/user/profile/update", name="user_profile_update", methods={"POST"})
+     */
+    public function updateProfile(Request $request, UserPasswordHasherInterface $passwordHasher): Response
+    {
+        $user = $this->getUser();
+
+        if (!$user) {
+            throw $this->createAccessDeniedException('Vous devez être connecté pour modifier votre profil.');
+        }
+
+        $email = $request->request->get('email');
+        $nickname = $request->request->get('nickname');
+        $password = $request->request->get('password');
+        $passwordConfirm = $request->request->get('password_confirm');
+
+        if ($password && $password !== $passwordConfirm) {
+            $this->addFlash('error', 'Les mots de passe ne correspondent pas.');
+            return $this->redirectToRoute('user_profile');
+        }
+
+        $user->setEmail($email);
+        $user->setNickname($nickname);
+
+        if ($password) {
+            $hashedPassword = $passwordHasher->hashPassword($user, $password);
+            $user->setPassword($hashedPassword);
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
+        $entityManager->persist($user);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'Votre profil a été mis à jour avec succès.');
+
+        return $this->redirectToRoute('user_profile');
+    }
+    
+            $this->addFlash('error', 'Une erreur est survenue lors de la mise à jour de votre profil.');
+            return $this->redirectToRoute('user_profile');
+        }
+    }
