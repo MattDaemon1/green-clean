@@ -4,7 +4,7 @@
     "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
-	"php": ">=8.4",
+        "php": ">=8.3",
         "symfony/asset": "^6.3",
         "symfony/console": "^6.3",
         "symfony/doctrine-messenger": "^6.3",
@@ -95,4 +95,3 @@
         "symfony/web-profiler-bundle": "^6.3"
     }
 }
-
