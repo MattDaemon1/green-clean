@@ -69,6 +69,8 @@ footer .text-body-secondary {
 .card-title {
     font-size: 20px;
     color: #333;
+    white-space: normal;
+    word-break: normal;
 }
 
 .card-text {
@@ -166,7 +168,8 @@ h3 {
 
 .card {
     flex: 1;
-    max-width: 30%;
+    /* max-width: 30%; */
+    /* Désactivé pour laisser Bootstrap gérer la largeur */
     min-height: 250px;
     border-radius: 15px;
     background-color: #f0f8ff;
@@ -203,4 +206,30 @@ h3 {
 
 .card .btn:hover {
     background-color: darken(#3498db, 10%);
+}
+
+.card.w-100 {
+    width: 100%;
+    min-width: 280px;
+    max-width: 400px;
+    margin: 20px auto;
+    flex: 1 1 320px;
+}
+
+.row.text-center {
+    justify-content: center;
+    align-items: stretch;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+}
+
+.col-md-4 {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    flex: 1 1 320px;
+    min-width: 320px;
+    max-width: 400px;
+    margin-bottom: 24px;
 }

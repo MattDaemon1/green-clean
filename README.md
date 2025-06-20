@@ -1,27 +1,50 @@
 # Green Clean
 
-Green Clean est une application web conçue pour faciliter la gestion des projets écologiques. Elle repose sur le framework Symfony et utilise des technologies modernes pour offrir une expérience utilisateur optimale.
+Green Clean est une application web qui connecte des donateurs à des projets écologiques innovants. Elle repose sur Symfony et propose une expérience moderne, sécurisée et responsive.
 
 ## Fonctionnalités principales
 
-- **Gestion des utilisateurs** : Inscription, connexion et gestion des rôles.
-- **Gestion des projets** : Création, modification et suppression de projets.
-- **Téléchargement de fichiers** : Support pour l'upload et la gestion des fichiers.
-- **Notifications** : Système de notifications pour les utilisateurs.
-- **Interface utilisateur moderne** : Construite avec Webpack Encore et SCSS.
+- **Parcours utilisateur complet** : navigation, inscription, connexion, dons, consultation des projets.
+- **Gestion des projets** : création, modification, suppression, upload d’images (VichUploader).
+- **Système de dons** : formulaire de don, historique, gestion des montants et messages personnalisés.
+- **Compteur de vues** : chaque projet affiche le nombre de consultations.
+- **Administration** : interface EasyAdmin pour gérer utilisateurs, projets et dons.
+- **Notifications** : messages de confirmation et alertes.
+- **Interface responsive** : Bootstrap 5, SCSS personnalisés, Webpack Encore.
+
+## Pages principales
+
+- **Accueil** (`/`) : Présentation, derniers projets, appel à l’action pour faire un don.
+- **Projets** (`/projets`) : Liste de tous les projets, accès à chaque fiche projet.
+- **Fiche projet** (`/projects/{id}`) : Détail du projet, image, description, compteur de vues, formulaire de don.
+- **À propos** (`/about`) : Présentation de l’association.
+- **Connexion** (`/login`) : Authentification utilisateur.
+- **Admin** (`/admin`) : Tableau de bord, gestion CRUD des entités (projets, dons, utilisateurs).
+
+## Architecture technique
+
+- Symfony 7, Doctrine ORM, Twig, Webpack Encore, Bootstrap 5, EasyAdmin, VichUploader, Redis.
+- Docker pour le développement local (PHP, Nginx, MySQL, Redis, phpMyAdmin).
+- Tests unitaires avec PHPUnit.
+
+## Exemple de parcours utilisateur
+
+1. L’utilisateur visite la page d’accueil, découvre les projets récents.
+2. Il consulte la liste complète des projets, puis la fiche détaillée d’un projet.
+3. Il se connecte ou s’inscrit pour faire un don.
+4. Il accède à son espace personnel (si implémenté) ou reçoit une confirmation de don.
+5. Un administrateur gère les projets, dons et utilisateurs via l’interface d’administration.
 
 ## Dépendances principales
 
-Le projet utilise les dépendances suivantes :
-
-- **Symfony Framework** : Framework PHP pour le développement web.
-- **Doctrine ORM** : Gestion des bases de données relationnelles.
-- **Twig** : Moteur de templates pour le rendu des vues.
-- **Webpack Encore** : Gestionnaire d'assets modernes pour JavaScript et CSS.
-- **VichUploaderBundle** : Gestion des téléchargements de fichiers.
-- **EasyAdminBundle** : Interface d'administration pour gérer les entités.
-- **Predis** : Client Redis pour PHP.
-- **PHPUnit** : Framework de tests unitaires pour PHP.
+- **Symfony Framework**
+- **Doctrine ORM**
+- **Twig**
+- **Webpack Encore**
+- **VichUploaderBundle**
+- **EasyAdminBundle**
+- **Predis**
+- **PHPUnit**
 
 ## Prérequis
 
@@ -33,29 +56,24 @@ Le projet utilise les dépendances suivantes :
 ## Installation
 
 1. Clonez le dépôt :
-   
+   ```bash
    git clone <url-du-repo>
    cd green-clean
-   
-
+   ```
 2. Installez les dépendances PHP :
-   
+   ```bash
    composer install
-   
-
+   ```
 3. Installez les dépendances JavaScript :
-   
+   ```bash
    npm install
-   
-
+   ```
 4. Configurez les variables d'environnement :
    Copiez le fichier `.env` en `.env.local` et modifiez les valeurs selon vos besoins.
-
 5. Lancez les migrations de la base de données :
    ```bash
    php bin/console doctrine:migrations:migrate
    ```
-
 6. (Optionnel) Lancez l'environnement Docker :
    ```bash
    docker-compose up -d
@@ -63,18 +81,7 @@ Le projet utilise les dépendances suivantes :
 
 ## Configuration des variables d'environnement
 
-Le fichier `.env` contient les variables d'environnement nécessaires pour configurer l'application. Voici les principales variables :
-
-- **APP_ENV** : Définit l'environnement d'exécution (`dev`, `prod`, `test`).
-- **APP_SECRET** : Clé secrète utilisée par Symfony pour des opérations cryptographiques.
-- **DATABASE_URL** : URL de connexion à la base de données (exemple : `mysql://root:root@db:3306/green?serverVersion=8.2&charset=utf8mb4`).
-- **MESSENGER_TRANSPORT_DSN** : Configuration pour le transport des messages (exemple : `doctrine://default?auto_setup=0`).
-- **MAILER_DSN** : Configuration pour l'envoi des emails (exemple : `smtp://localhost:1025`).
-- **REDIS_URL** : URL de connexion au serveur Redis (exemple : `redis://localhost:6379`).
-
-### Exemple de configuration
-
-Voici un exemple de fichier `.env.local` :
+Le fichier `.env` contient les variables d'environnement nécessaires pour configurer l'application. Exemple :
 ```env
 APP_ENV=dev
 APP_SECRET=your_secret_key
@@ -86,38 +93,20 @@ REDIS_URL=redis://localhost:6379
 
 ## Utilisation de Docker
 
-Le projet inclut une configuration Docker pour simplifier le déploiement et le développement local. Voici les services configurés dans le fichier `docker-compose.yml` :
-
-- **app** : Conteneur principal exécutant l'application Symfony avec PHP 8.3 et les extensions nécessaires.
-- **nginx** : Serveur web Nginx configuré pour servir l'application.
-- **db** : Base de données MySQL 8.0 avec un utilisateur et une base de données dédiés.
-- **phpmyadmin** : Interface graphique pour gérer la base de données MySQL, accessible sur le port 8081.
-- **redis** : Serveur Redis utilisé pour la mise en cache et les files d'attente.
+Le projet inclut une configuration Docker pour simplifier le déploiement et le développement local. Services :
+- **app** : Symfony + PHP 8.3
+- **nginx** : Serveur web
+- **db** : MySQL 8.0
+- **phpmyadmin** : Interface MySQL (port 8081)
+- **redis** : Cache et files d'attente
 
 ### Commandes Docker
-
-1. **Démarrer les conteneurs** :
-   ```bash
-   docker-compose up -d
-   ```
-
-2. **Arrêter les conteneurs** :
-   ```bash
-   docker-compose down
-   ```
-
-3. **Recréer les conteneurs (si nécessaire)** :
-   ```bash
-   docker-compose up -d --build
-   ```
-
-4. **Accéder à un conteneur** :
-   ```bash
-   docker exec -it symfony_app bash
-   ```
+- Démarrer : `docker-compose up -d`
+- Arrêter : `docker-compose down`
+- Recréer : `docker-compose up -d --build`
+- Accéder à un conteneur : `docker exec -it symfony_app bash`
 
 ### Accès aux services
-
 - Application : [http://localhost:8000](http://localhost:8000)
 - PhpMyAdmin : [http://localhost:8081](http://localhost:8081)
 
@@ -127,13 +116,10 @@ Le projet inclut une configuration Docker pour simplifier le déploiement et le 
    ```bash
    npm run dev
    ```
-
 2. Lancez le serveur Symfony :
    ```bash
    symfony server:start
    ```
-
-Accédez à l'application via [http://localhost:8000](http://localhost:8000).
 
 ## Tests
 
@@ -144,25 +130,23 @@ php bin/phpunit
 
 ## Structure du projet
 
-- **assets/** : Contient les fichiers JavaScript, SCSS et images.
-- **config/** : Fichiers de configuration de Symfony.
-- **public/** : Point d'entrée public de l'application.
-- **src/** : Contient le code source de l'application (contrôleurs, entités, services, etc.).
-- **templates/** : Fichiers Twig pour le rendu des vues.
-- **tests/** : Tests unitaires et fonctionnels.
-- **translations/** : Fichiers de traduction.
+- **assets/** : JS, SCSS, images
+- **config/** : Configuration Symfony
+- **public/** : Point d'entrée public
+- **src/** : Contrôleurs, entités, services
+- **templates/** : Vues Twig
+- **tests/** : Tests
+- **translations/** : Traductions
 
 ## Entités principales
 
-- **User** : Représente les utilisateurs de l'application avec des rôles, des identifiants uniques et des relations avec les dons.
-- **Projects** : Gère les projets écologiques, incluant des informations comme le titre, la description et les images associées.
-- **Donations** : Permet de suivre les dons effectués par les utilisateurs pour des projets spécifiques.
-
-Ces entités sont définies dans le dossier `src/Entity` et utilisent Doctrine ORM pour la gestion des relations et des bases de données.
+- **User** : Utilisateurs, rôles, dons
+- **Projects** : Projets écologiques (titre, description, image)
+- **Donations** : Dons liés à un projet et un utilisateur
 
 ## Contribution
 
-Les contributions sont les bienvenues ! Veuillez soumettre une pull request ou ouvrir une issue pour discuter des changements que vous souhaitez apporter.
+Les contributions sont les bienvenues ! Veuillez soumettre une pull request ou ouvrir une issue pour discuter des changements.
 
 ## Licence
 
