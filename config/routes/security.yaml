@@ -1,3 +1,5 @@
 _security_logout:
-    resource: security.route_loader.logout
-    type: service
+    path: /logout
+    methods: [POST]
+    defaults:
+        _controller: Symfony\Component\Security\Http\Logout\LogoutController::logoutAction
