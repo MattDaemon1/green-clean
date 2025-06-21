@@ -9,6 +9,7 @@
         "doctrine/doctrine-migrations-bundle": "^3.4",
         "doctrine/orm": "^3.4",
         "easycorp/easyadmin-bundle": "^4.20",
+        "predis/predis": "^3.0",
         "symfony/asset": "^6.4",
         "symfony/console": "^6.4",
         "symfony/doctrine-messenger": "^6.4",
