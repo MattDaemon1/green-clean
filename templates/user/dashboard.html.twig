@@ -1,18 +1,52 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Dashboard User
-{% endblock %}
+{% block title %}Dashboard Utilisateur{% endblock %}
 
 {% block body %}
-	<h1>Bienvenue sur votre profil</h1>
-	<p>Voici votre tableau de bord utilisateur.</p>
-	<a href="{{ path('user_profile') }}">Mon Profil</a>
-	<a href="{{ path('user_projects') }}">Mes Projets</a>
-	<a href="{{ path('user_donations') }}">Mes Dons</a>
-	<a href="{{ path('user_settings') }}">Paramètres</a>
-	
-	
-		
-	
-	
+    <h1>Bienvenue sur votre tableau de bord</h1>
+
+    <div class="dashboard-cards">
+        <!-- Colonne gauche : Statistiques et Dons -->
+        <div class="card full-width-card">
+            <h2>Mes statistiques et mes dons</h2>
+            
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>{{ app.user.donations|length }} Dons effectués</h3>
+                </div>
+            </div>
+
+            <h3>Mes dons</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Projet</th>
+                        <th>Montant</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for donation in app.user.donations %}
+                        <tr>
+                            <td>{{ donation.projects.title }}</td>
+                            <td>{{ donation.sum }} €</td>
+                            <td>{{ donation.date|date('d/m/Y') }}</td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="3">Aucun don effectué.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Colonne droite : Modification du profil -->
+        <div class="card">
+            <h2>Modifier mon profil</h2>
+            <p>Mettez à jour vos informations personnelles.</p>
+            <a href="{{ path('user_user_edit', {id: app.user.id}) }}" class="btn btn-primary btn-sm">Modifier</a>
+        </div>
+    </div>
 {% endblock %}
+

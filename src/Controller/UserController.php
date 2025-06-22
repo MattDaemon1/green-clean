@@ -5,8 +5,11 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attributes\RouteAttributes;
 use App\Repository\DonationsRepository;
 use Symfony\Component\HttpFoundation\Request;
+use App\Entity\User;
+use App\Form\UserType;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -21,26 +24,51 @@ class UserController extends AbstractController
         $this->entityManager = $entityManager;
     }
 
-    /**
-     * @Route("/user/dashboard", name="user_dashboard")
-     */
+    #[Route('/user/dashboard', name: 'user_dashboard')]
     public function dashboard(): Response
     {
         return $this->render('user/dashboard.html.twig');
     }
 
-    /**
-     * @Route("/user/profile", name="user_profile")
-     */
+    #[Route('/user/profile', name: 'user_profile')]
     public function profile(): Response
     {
         // Logic for user profile
         return $this->render('user/profile.html.twig');
     }
 
-    /**
-     * @Route("/user/projects", name="user_projects")
-     */
+    #[Route('/user/{id}/edit', name: 'user_user_edit')]
+    public function user_edit(Request $request, User $user, UserPasswordHasherInterface $passwordHasher): Response
+    {
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user = $form->getData();
+            
+            // Hash the password if it was changed
+            if ($form->get('plainPassword')->getData()) {
+                $user->setPassword(
+                    $passwordHasher->hashPassword(
+                        $user,
+                        $form->get('plainPassword')->getData()
+                    )
+                );
+            }
+
+            $this->entityManager->flush();
+            
+            $this->addFlash('success', 'Profil mis à jour avec succès.');
+            return $this->redirectToRoute('user_profile');
+        }
+
+        return $this->render('user/profile-edit.html.twig', [
+            'form' => $form->createView(),
+            'user' => $user
+        ]);
+    }
+
+    #[Route('/user/projects', name: 'user_projects')]
     public function projects(): Response
     {
         // Logic for user projects

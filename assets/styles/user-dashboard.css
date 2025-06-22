@@ -1,0 +1,79 @@
+.dashboard-cards {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.card {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.full-width-card {
+    grid-column: 1 / 2;
+}
+
+.card h2 {
+    margin: 0 0 1rem;
+    color: #2c3e50;
+}
+
+.card p {
+    margin: 0 0 1rem;
+    color: #7f8c8d;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.stat-item {
+    text-align: center;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 4px;
+}
+
+.stat-item h3 {
+    color: #2c3e50;
+    font-size: 2rem;
+    margin: 0;
+}
+
+.stat-item p {
+    color: #7f8c8d;
+    margin: 0.5rem 0 0;
+}
+
+.projects-grid, .donations-grid {
+    margin-top: 1rem;
+}
+
+.project-card, .donation-card, .donation-item {
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+.donation-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.donation-item h3 {
+    margin: 0 0 0.5rem;
+    color: #2c3e50;
+}
+
+.project-card h3, .donation-card h3 {
+    margin: 0 0 0.5rem;
+    color: #2c3e50;
+}
