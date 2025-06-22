@@ -7,22 +7,37 @@
 	<h1>Bienvenue sur le Dashboard Administrateur</h1>
 
 	<div class="dashboard-cards">
-		<div class="card">
-			<h2>Gestion des Dons</h2>
-			<p>Consultez et gérez les donations effectuées.</p>
-			<a href="{{ path('admin_donations') }}" class="btn btn-success">Voir les Dons</a>
+		<div class="card full-width-card">
+			<h2>Statistiques des Projets</h2>
+			<p>Voici les projets les plus vus sur la plateforme.</p>
+			<div class="top-projects-list">
+				{% for project in topProjects %}
+					<div class="project-item">
+						<h3>{{ project.project.title }}</h3>
+						<p>Vues: {{ project.views }}</p>
+					</div>
+				{% endfor %}
+			</div>
 		</div>
 
-		<div class="card">
-			<h2>Gestion des Utilisateurs</h2>
-			<p>Gérez les utilisateurs de la plateforme.</p>
-			<a href="{{ path('admin_users') }}" class="btn btn-success">Voir les Utilisateurs</a>
-		</div>
+		<div class="three-columns">
+			<div class="card">
+				<h2>Gestion des Dons</h2>
+				<p>Consultez et gérez les donations effectuées.</p>
+				<a href="{{ path('admin_donations') }}" class="btn btn-success">Voir les Dons</a>
+			</div>
 
-		<div class="card">
-			<h2>Gestion des Projets</h2>
-			<p>Consultez et administrez les projets en cours.</p>
-			<a href="{{ path('admin_projects') }}" class="btn btn-success">Voir les Projets</a>
+			<div class="card">
+				<h2>Gestion des Utilisateurs</h2>
+				<p>Gérez les utilisateurs de la plateforme.</p>
+				<a href="{{ path('admin_users') }}" class="btn btn-success">Voir les Utilisateurs</a>
+			</div>
+
+			<div class="card">
+				<h2>Gestion des Projets</h2>
+				<p>Consultez et administrez les projets en cours.</p>
+				<a href="{{ path('admin_projects') }}" class="btn btn-success">Voir les Projets</a>
+			</div>
 		</div>
 	</div>
 {% endblock %}
