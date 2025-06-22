@@ -3,6 +3,12 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+
+
+Page:
+    path: /
+    controller: App\Controller\PageController::index
+
 reset_password:
     path: /reset-password
     controller: Symfony\Bundle\SecurityBundle\Controller\ForgottenPasswordController::requestTokenAction
