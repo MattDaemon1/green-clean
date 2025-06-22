@@ -20,8 +20,39 @@ RUN apt-get update && apt-get install -y \
     && echo "extension=mongodb.so" > /usr/local/etc/php/conf.d/mongodb.ini \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN apt-get update && apt-get install -y libcurl4-openssl-dev libssl-dev \
-    && if ! php -m | grep -q mongodb; then pecl install mongodb && echo "extension=mongodb.so" > /usr/local/etc/php/conf.d/mongodb.ini; fi
+# Installation des extensions PHP
+RUN apt-get update && apt-get install -y \
+    libcurl4-openssl-dev \
+    libssl-dev \
+    libicu-dev \
+    libonig-dev \
+    libzip-dev \
+    libpng-dev \
+    libjpeg-dev \
+    libfreetype6-dev \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install \
+        intl \
+        pdo_mysql \
+        zip \
+        opcache \
+        curl \
+        mbstring \
+        gd \
+        exif \
+        bcmath \
+        soap \
+        xmlrpc \
+        ldap \
+        mysqli \
+        pdo_pgsql \
+        pdo_sqlite \
+        sqlite3 \
+        pdo_dblib \
+        pdo_firebird \
+        pdo_interbase \
+        pdo_ibm \
+        pdo_sqlsrv
 
 # Installation de Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -38,6 +69,7 @@ WORKDIR /var/www
 
 # Copie du projet Symfony
 COPY . /var/www
+COPY php/docker-php.ini /usr/local/etc/php/conf.d/zz-docker-php.ini
 
 # Droits corrects pour le stockage
 RUN chown -R www-data:www-data /var/www/var \

@@ -1,4 +1,6 @@
 {
+    "name": "green-clean/green-clean",
+    "description": "Green & Clean - Application de dons",
     "type": "project",
     "license": "proprietary",
     "minimum-stability": "stable",
