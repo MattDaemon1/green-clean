@@ -1,6 +1,12 @@
 
 
 services:
+  redis_data:
+    image: tianon/true
+    volumes:
+      - redis_data:/data
+    command: "true"
+
   app:
     build:
       context: .
@@ -52,7 +58,7 @@ services:
     volumes:
       - redis_data:/data
       - ./redis/redis.conf:/usr/local/etc/redis/redis.conf:ro
-    command: redis-server /usr/local/etc/redis/redis.conf
+    command: redis-server /usr/local/etc/redis/redis.conf --appendonly yes --save 900 1 --save 300 10 --save 60 10000
     ports:
       - "6379:6379"
 
