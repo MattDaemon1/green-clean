@@ -1,11 +1,7 @@
 
 
 services:
-  redis_data:
-    image: tianon/true
-    volumes:
-      - redis_data:/data
-    command: "true"
+
 
   app:
     build:
