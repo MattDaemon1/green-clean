@@ -1,31 +1,9 @@
 # Image de base PHP avec FPM et CLI
 FROM php:8.3-fpm
 
-# Installation des certificats SSL avant les extensions pour éviter les erreurs de mise à jour
-RUN apt-get update && apt-get install -y ca-certificates
-
-# Installation des dépendances système et extensions PHP nécessaires
+# Installation des dépendances minimales
 RUN apt-get update && apt-get install -y \
-    curl \
-    git \
-    libcurl4-openssl-dev \
     libicu-dev \
-    libonig-dev \
-    libssl-dev \
-    libzip-dev \
-    unzip \
-    && docker-php-ext-install intl pdo_mysql zip opcache curl mbstring \
-    && docker-php-ext-enable opcache curl mbstring \
-    && pecl install mongodb \
-    && echo "extension=mongodb.so" > /usr/local/etc/php/conf.d/mongodb.ini \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
-
-# Installation des extensions PHP
-RUN apt-get update && apt-get install -y \
-    libcurl4-openssl-dev \
-    libssl-dev \
-    libicu-dev \
-    libonig-dev \
     libzip-dev \
     libpng-dev \
     libjpeg-dev \
@@ -39,20 +17,8 @@ RUN apt-get update && apt-get install -y \
         curl \
         mbstring \
         gd \
-        exif \
-        bcmath \
-        soap \
-        xmlrpc \
-        ldap \
-        mysqli \
-        pdo_pgsql \
-        pdo_sqlite \
-        sqlite3 \
-        pdo_dblib \
-        pdo_firebird \
-        pdo_interbase \
-        pdo_ibm \
-        pdo_sqlsrv
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 # Installation de Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
