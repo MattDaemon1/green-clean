@@ -1,24 +1,34 @@
 # Image de base PHP avec FPM et CLI
 FROM php:8.3-fpm
 
-# Installation des dépendances minimales
+# Installation des dépendances système
 RUN apt-get update && apt-get install -y \
     libicu-dev \
     libzip-dev \
+    libcurl4-openssl-dev \
+    libonig-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Installation de GD
+RUN apt-get update && apt-get install -y \
     libpng-dev \
     libjpeg-dev \
     libfreetype6-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install \
-        intl \
-        pdo_mysql \
-        zip \
-        opcache \
-        curl \
-        mbstring \
-        gd \
-    && apt-get clean \
+    && docker-php-ext-install gd \
     && rm -rf /var/lib/apt/lists/*
+
+# Installation des autres extensions PHP
+RUN docker-php-ext-install \
+    intl \
+    pdo_mysql \
+    zip \
+    opcache \
+    curl \
+    mbstring
+
+# Nettoyage
+RUN apt-get clean
 
 # Installation de Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
