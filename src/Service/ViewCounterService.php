@@ -3,7 +3,6 @@
 namespace App\Service;
 
 use Symfony\Component\Cache\Adapter\RedisAdapter;
-use Symfony\Contracts\Cache\ItemInterface;
 
 class ViewCounterService
 {
