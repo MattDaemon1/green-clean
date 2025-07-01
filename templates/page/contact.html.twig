@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact - Green & Clean{% endblock %}
+
+{% block body %}
+<div class="container mt-5 mb-5">
+    <h1>Contact</h1>
+    <p class="mb-4 text-center">Vous pouvez nous contacter pour toute question ou pour proposer un projet. Remplissez le formulaire ci-dessous, nous vous répondrons rapidement.</p>
+    {% if success %}
+        <div class="alert alert-success text-center">Votre message a bien été envoyé. Merci pour votre prise de contact !</div>
+    {% else %}
+        {{ form_start(form) }}
+        <div class="row mb-3">
+            <div class="col-md-6 mb-3">
+                {{ form_row(form.nom) }}
+            </div>
+            <div class="col-md-6 mb-3">
+                {{ form_row(form.prenom) }}
+            </div>
+        </div>
+        <div class="mb-3">
+            {{ form_row(form.email) }}
+        </div>
+        <div class="mb-3">
+            {{ form_row(form.sujet) }}
+        </div>
+        <div class="mb-3">
+            {{ form_row(form.message) }}
+        </div>
+        <div class="mb-3 form-check">
+            {{ form_row(form.rgpd) }}
+        </div>
+        <button type="submit" class="btn btn-primary">Envoyer</button>
+        {{ form_end(form) }}
+    {% endif %}
+</div>
+{% endblock %}
