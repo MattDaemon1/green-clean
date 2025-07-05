@@ -1,4 +1,5 @@
 
+{
     "controllers": {
         "mercure-turbo-stream": {
             "enabled": true,
@@ -6,4 +7,4 @@
         }
     },
     "entrypoints": []
-
+}
