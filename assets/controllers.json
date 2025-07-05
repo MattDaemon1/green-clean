@@ -1,10 +1,5 @@
 
 {
-    "controllers": {
-        "mercure-turbo-stream": {
-            "enabled": true,
-            "fetch": "eager"
-        }
-    },
+    "controllers": {},
     "entrypoints": []
 }
