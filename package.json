@@ -19,7 +19,7 @@
   "license": "UNLICENSED",
   "private": true,
   "scripts": {
-    "heroku-postbuild": "yarn install && yarn run encore production",
+    "heroku-postbuild": "npm install && npm run build",
     "dev-server": "encore dev-server",
     "dev": "encore dev",
     "watch": "encore dev --watch",
