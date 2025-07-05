@@ -1,0 +1,21 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Set the RewriteBase if your app is in a subdirectory
+    # RewriteBase /
+
+    # Redirect to index.php if the requested file or directory does not exist
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^ index.php [QSA,L]
+</IfModule>
+
+# Pass the Authorization header to PHP
+<IfModule mod_setenvif.c>
+    SetEnvIf Authorization .+ HTTP_AUTHORIZATION=$0
+</IfModule>
+
+# Deny .htaccess file access
+<Files .htaccess>
+    Require all denied
+</Files>
