@@ -18,12 +18,16 @@
   },
   "license": "UNLICENSED",
   "private": true,
+  "engines": {
+    "node": "20.x",
+    "npm": "10.x"
+  },
   "scripts": {
     "heroku-postbuild": "npm install && npm run build",
     "dev-server": "encore dev-server",
     "dev": "encore dev",
     "watch": "encore dev --watch",
-    "build": "encore production --progress"
+    "build": "npx encore production --progress"
   },
   "dependencies": {
     "@symfony/stimulus-bridge": "^3.2.2"
